@@ -1,0 +1,128 @@
+<!--I declare that this code was written by me. 
+I will not copy or allow others to copy my code. 
+I understand that copying code is considered as plagiarism.
+
+Student Name: Akhilesh Nelson
+Student ID: 22009645
+Class: C369-1D-E63C-A
+Date/Time Last modified: 31/7/2023 6.45pm
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MoneyMate - Login & Signup</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<style>
+/* Styles as before */
+</style>
+<body>
+  <div class="container">
+    <div class="login-form">
+      <h2>Sign up</h2>
+      <form id="signupForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" required>
+
+        <label for="birthdate">Birth Date:</label>
+        <input type="date" id="birthdate" name="birthdate" required>
+
+        <label for="userId">User ID:</label>
+        <input type="text" id="userId" name="userId" required>
+
+        <label for="pinNumber">PIN Number:</label>
+        <input type="password" id="pinNumber" name="pinNumber" required>
+
+        <div class="error-message" id="errorMessage"></div>
+
+        <button type="submit">Sign up</button>
+      </form>
+
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form submission for now, we'll handle it with JavaScript
+
+      // Fetch user input
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const phoneNumber = document.getElementById("phoneNumber").value;
+      const birthdate = document.getElementById("birthdate").value;
+      const userId = document.getElementById("userId").value;
+      const pinNumber = document.getElementById("pinNumber").value;
+      const errorMessage = document.getElementById("errorMessage");
+
+      // Regular expressions for validation
+      const numericRegex = /^\d+$/;
+      const alphabeticRegex = /^[a-zA-Z]+$/;
+
+      // Reset the error message
+      errorMessage.textContent = "";
+
+      // Check name validity
+      if (numericRegex.test(name) || !name.trim()) {
+        errorMessage.textContent = "Invalid name";
+        return;
+      }
+
+      // Check email validity
+      // You can add a more comprehensive email validation regex if needed
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        errorMessage.textContent = "Invalid email address";
+        return;
+      }
+
+      // Check phone number validity
+      const phoneRegex = /^\d{8}$/; // 8-digit phone number validation
+      if (!phoneRegex.test(phoneNumber)) {
+        errorMessage.textContent = "Invalid phone number";
+        return;
+      }
+
+      // Check birth date validity (You can add more complex validation if required)
+      if (!birthdate) {
+        errorMessage.textContent = "Please enter a valid birth date";
+        return;
+      }
+
+      // Check user ID validity
+      if (numericRegex.test(userId) || alphabeticRegex.test(userId)) {
+        errorMessage.textContent = "Invalid user ID";
+        return;
+      }
+
+      // Check PIN number validity
+      if (pinNumber.length !== 6 || !numericRegex.test(pinNumber)) {
+        errorMessage.textContent = "Invalid PIN number";
+        return;
+      }
+
+      
+      console.log("Name: " + name);
+      console.log("Email: " + email);
+      console.log("Phone Number: " + phoneNumber);
+      console.log("Birth Date: " + birthdate);
+      console.log("User ID: " + userId);
+      console.log("PIN Number: " + pinNumber);
+
+      
+      console.log("Signup successful!");
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+

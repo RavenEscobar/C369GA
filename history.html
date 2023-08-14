@@ -1,0 +1,97 @@
+<!--I declare that this code was written by me. 
+I will not copy or allow others to copy my code. 
+I understand that copying code is considered as plagiarism.
+
+Student Name: Akhilesh Nelson
+Student ID: 22009645
+Class: C369-1D-E63C-A
+Date/Time Last modified: 14/8/2023 6.45pm
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoneyMate - Transaction History</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <button onclick="logout()">Home</button>
+    </nav>
+    <h1>Transaction History</h1>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: blue; 
+        }
+    </style>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Sender</th>
+                <th>Receiver</th>
+                <th>Amount (SGD)</th>
+                <th>Converted Amount</th>
+                <th>Currency</th>
+            </tr>
+        </thead>
+        <tbody id="transactionTable">
+            
+        </tbody>
+    </table>
+
+    <script>
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+
+        function filterTransactions(filter) {
+            const filteredTransactions = filter === 'all'
+                ? transactions
+                : transactions.filter(txn => txn.sender === loggedInUser && txn.type === filter);
+
+            displayTransactions(filteredTransactions);
+        }
+
+        function displayTransactions(filteredTransactions) {
+            const transactionTable = document.getElementById('transactionTable');
+            transactionTable.innerHTML = '';
+
+            filteredTransactions.forEach(txn => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${txn.sender}</td>
+                    <td>${txn.receiver}</td>
+                    <td>${txn.amount}</td>
+                    <td>${(txn.amount * getCurrencyValue(txn.currency)).toFixed(2)}</td>
+                    <td>${txn.currency}</td>
+                `;
+                transactionTable.appendChild(tr);
+            });
+        }
+
+        function getCurrencyValue(currency) {
+            const conversionRates = {
+                "USD": 1,
+                "EUR": 0.74,
+                "GBP": 0.58,
+                "JPY": 76.14,
+                "AUD": 1.29,
+                "CAD": 1.06
+            };
+            return conversionRates[currency] || 1;
+        }
+
+        function logout() {
+            localStorage.removeItem('loggedInUser');
+            window.location.href = 'homepage.html';
+        }
+
+        
+        filterTransactions('all');
+    </script>
+</body>
+</html>

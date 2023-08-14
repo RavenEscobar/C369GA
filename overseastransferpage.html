@@ -1,0 +1,92 @@
+<!--I declare that this code was written by me. 
+I will not copy or allow others to copy my code. 
+I understand that copying code is considered as plagiarism.
+
+Student Name: Akhilesh Nelson
+Student ID: 22009645
+Class: C369-1D-E63C-A
+Date/Time Last modified: 14/8/2023 6.45pm
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overseas Transfer Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <button id="homeButton" onclick="goToHomePage()">Home</button>
+    </nav>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: blue;
+        }
+    </style>
+    <h1>Overseas Transfer Page</h1>
+    <form id="transferForm">
+        <label>Sender:</label>
+        <input type="text" id="sender">
+        <label>Type in SGD amount:</label>
+        <input type="number" id="amount" required oninput="calculateConversion()">
+        <label>Select Currency:</label>
+        <select id="currency" onchange="calculateConversion()">
+            <option value="0.75">USD</option>
+            <option value="0.68">EUR</option>
+            <option value="0.59">GBP</option>
+            <option value="105.86">JPY</option>
+            <option value="1.14">AUD</option>
+            <option value="1.00">CAD</option>
+        </select>
+        <label>Converted Amount:</label>
+        <input type="text" id="convertedAmount" readonly>
+        <label>Receiver:</label>
+        <input type="text" id="receiver" required>
+        <button type="submit">Transfer</button>
+    </form>
+    <p id="transferStatus"></p>
+    <script>
+         const loggedInUser = localStorage.getItem('loggedInUser');
+        if (!loggedInUser) {
+            window.location.href = 'overseastransferpage.html';
+        }
+
+        document.getElementById('sender').value = loggedInUser;
+
+        function calculateConversion() {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const conversionRate = parseFloat(document.getElementById('currency').value);
+            document.getElementById('convertedAmount').value = (amount * conversionRate).toFixed(2);
+        }
+
+        const transferForm = document.getElementById('transferForm');
+        const transferStatus = document.getElementById('transferStatus');
+        transferForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+            const sender = document.getElementById('sender').value;
+            const amount = document.getElementById('amount').value;
+            const convertedAmount = document.getElementById('convertedAmount').value;
+            const currencyType = document.getElementById('currency').selectedOptions[0].innerText;
+            const receiver = document.getElementById('receiver').value;
+            transactions.push({
+                sender,
+                amount,
+                receiver,
+                convertedAmount,
+                currency: currencyType
+            });
+            localStorage.setItem('transactions', JSON.stringify(transactions));
+            transferStatus.textContent = 'Transfer Completed';
+        });
+
+        function goToHomePage() {
+            window.location.href = 'homepage.html';
+        }
+    </script>
+</body>
+</html>

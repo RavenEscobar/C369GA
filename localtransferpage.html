@@ -1,0 +1,74 @@
+<!--I declare that this code was written by me. 
+I will not copy or allow others to copy my code. 
+I understand that copying code is considered as plagiarism.
+
+Student Name: Akhilesh Nelson
+Student ID: 22009645
+Class: C369-1D-E63C-A
+Date/Time Last modified: 14/8/2023 6.45pm
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Transfer Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Local Transfer</h1>
+        <label for="fromAccountOrNumber">From Account/Phone Number:</label>
+        <input type="text" id="fromAccountOrNumber" placeholder="Enter account number or phone number">
+
+        <label for="toAccountOrNumber">To Account/Phone Number:</label>
+        <input type="text" id="toAccountOrNumber" placeholder="Enter account number or phone number">
+
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" placeholder="Enter amount">
+
+        <button onclick="transferAmount()">Transfer</button>
+        <p id="confirmationMessage"></p>
+        
+        <button onclick="goToHomePage()">Home</button>
+    </div>
+
+    <script>
+        function transferAmount() {
+            const fromAccountOrNumber = document.getElementById("fromAccountOrNumber").value;
+            const toAccountOrNumber = document.getElementById("toAccountOrNumber").value;
+            const amount = parseFloat(document.getElementById("amount").value);
+
+            
+            if (!amount || amount <= 0) {
+                alert("Please enter a valid amount.");
+                return;
+            }
+
+            
+
+            document.getElementById("confirmationMessage").textContent = `Successfully transferred $${amount.toFixed(
+                2
+            )} from account/phone number ${fromAccountOrNumber} to account/phone number ${toAccountOrNumber}.`;
+        }
+        
+        function goToHomePage() {
+            // Redirect to the homepage URL
+            window.location.href = "homepage.html"; 
+        }
+    </script>
+
+    <style>
+       body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: blue;
+       }
+    </style>
+</body>
+
+</html>
+

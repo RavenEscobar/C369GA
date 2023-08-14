@@ -1,0 +1,142 @@
+<!--I declare that this code was written by me. 
+I will not copy or allow others to copy my code. 
+I understand that copying code is considered as plagiarism.
+
+Student Name: Akhilesh Nelson
+Student ID: 22009645
+Class: C369-1D-E63C-A
+Date/Time Last modified: 31/7/2023 6.45pm
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MoneyMate - Login & Signup</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<style>
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: blue;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .login-form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-top: 10px;
+  }
+  
+  input {
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  
+  button {
+    background-color: black;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: black;
+  }
+  
+  .signup-option {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  a {
+    text-decoration: none;
+    color: black;
+  }
+  
+  .error-message {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+  }
+</style>
+<body>
+  <div class="container">
+    <div class="login-form">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <label for="userId">User ID:</label>
+        <input type="text" id="userId" name="userId" required>
+
+        <label for="pinNumber">PIN Number:</label>
+        <input type="password" id="pinNumber" name="pinNumber" required>
+
+        <div class="error-message" id="errorMessage"></div>
+
+        <button type="submit">Log In</button>
+      </form>
+
+      <div class="signup-option">
+        <p>Don't have an account?</p>
+        <a href="signup.html">Click here to sign up</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(event) {
+      event.preventDefault(); 
+
+      // Fetch user input
+      const userId = document.getElementById("userId").value;
+      const pinNumber = document.getElementById("pinNumber").value;
+      const errorMessage = document.getElementById("errorMessage");
+
+      // Regular expressions for validation
+      const numericRegex = /^\d+$/;
+      const alphabeticRegex = /^[a-zA-Z]+$/;
+
+      // Reset the error message
+      errorMessage.textContent = "";
+
+      // Check user ID validity
+      if (numericRegex.test(userId) || alphabeticRegex.test(userId)) {
+        errorMessage.textContent = "Invalid user ID";
+        return;
+      }
+
+      // Check PIN number validity
+      if (pinNumber.length !== 6 || !numericRegex.test(pinNumber)) {
+        errorMessage.textContent = "Invalid PIN number";
+        return;
+      }
+
+      // If both user ID and PIN number are valid, redirect to homepage.html
+      window.location.href = "homepage.html";
+    });
+  </script>
+</body>
+</html>
